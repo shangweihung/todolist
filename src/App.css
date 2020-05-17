@@ -120,3 +120,18 @@ body{
   border: 2px solid #C8C8C8;
   border-radius: 5px;
 }
+
+/*加上刪除線*/
+.complete{
+  text-decoration: line-through;
+  color: #9B9B9B;
+}
+
+/*更換背景顏色*/
+.important{
+  background: #FFF2DC;
+}
+/*更換icon顏色*/
+.iconImportant{
+  color: #F5A623;
+}

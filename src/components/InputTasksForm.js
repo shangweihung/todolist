@@ -4,30 +4,32 @@ import InputName from './InputName';
 class InputTasksForm extends React.Component{
     render() {
         return (
-            <div class="InputTasksForm">
+            <div>
                 <div class="InputTask">
                     <InputName className="fas fa-calendar-alt" inputName="Deadline" />
                     <div class="inputForm">
-                        <input type="date" class="inputStyle inputDateTime" value={this.props.date}/>
-                        <input type="time" class="inputStyle inputDateTime" value={this.props.time}/>
+                        <input name="date" type="date" class="inputStyle inputDateTime" value={this.props.stateData.date} onChange={this.props.changeState} />
+                        &nbsp;&nbsp;
+                        <input name="time" type="time" class="inputStyle inputDateTime" value={this.props.stateData.time} onChange={this.props.changeState} />
                     </div>
 
                     <InputName className="fas fa-file" inputName="File" />
                     <div class="inputForm">
-                        <input type="file" class="inputStyle" /><br/>
-                        <span class="inputStyle">{this.props.fileName}</span>
+                        <input name="file" type="file" class="inputStyle" ref={this.props.filebox} onChange={this.props.changeState} /><br/>
+                        <span class="inputStyle">{this.props.stateData.file}</span>
                     </div>
 
                     <InputName className="far fa-comment-dots" inputName="Comment" />
                     <div class="inputForm">
-                        <textarea rows="7" cols="55" class="inputStyle">
-                            {this.props.comment}
+                        <textarea name="commit" rows="7" cols="55" class="inputStyle"
+                             value={this.props.stateData.commit} 
+                             onChange={this.props.changeState} >
                         </textarea>
                     </div>
                 </div>
                 <div>
                     <button type="button" class="addButton cancelButton" onClick={this.props.closeAdd}> Cancel</button>
-                    <button type="button" class="addButton saveButton"> Save</button>
+                    <button type="button" class="addButton saveButton" onClick={this.props.submitTodo}> Save</button>
                 </div>
             </div>
         )
