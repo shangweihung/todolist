@@ -156,3 +156,10 @@ body{
   margin-left: 25px;
   font-size: 16px;
 }
+
+.countText{
+  margin:5px;
+  text-align: left;
+  font-size: 24px;
+  color: #C8C8C8;
+}

@@ -5,13 +5,26 @@ import List from './List';
 class ConnectTodoLists extends React.Component {
 
     render() {
+        this.props.data
+            .sort((f,s) => {return f.important<s.important?1:-1})
+            .sort((f,s) => {return f.complete>s.complete?1:-1})
+        
+        console.log(this.props.data)
+
+        let todoCount = 0
         let Lists = this.props.data.map((item) => {
+            if(!item.complete) {todoCount++}
             return <List key={item.id} listData={item} />
         })
 
         return (
             <div>
-                {Lists}
+                <div>
+                    {Lists}
+                </div>
+                <div class="countText">
+                    <span>{todoCount} tasks left.</span>
+                </div>
             </div>
         )
     }
