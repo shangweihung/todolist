@@ -135,3 +135,24 @@ body{
 .iconImportant{
   color: #F5A623;
 }
+
+/*事項框框的樣式*/
+.list{
+    background: #F2F2F2;
+    height: 100px;
+    width: 620px;
+    border-radius: 5px;
+    text-align: left;
+}
+
+/*要離上面20px*/
+.listBlock{
+    margin-top: 20px;
+}
+
+.listIcon{
+  color: #757575;
+  margin-top: -15px;
+  margin-left: 25px;
+  font-size: 16px;
+}
