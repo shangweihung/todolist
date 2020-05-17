@@ -6,20 +6,33 @@ import { addTodoList } from '../redux/action';
 class ConnectInputTask  extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {
-            id:'',
-            name:'',
-            date:'',
-            time:'',
-            file:'',
-            commit:'',
-            important:'',
-            complete:false
+        if (this.props.listData) {
+            this.state = this.props.listData
+        } else {
+            this.state = {
+                id:'',
+                name:'',
+                date:'',
+                time:'',
+                file:'',
+                commit:'',
+                important:'',
+                complete:false
+            }
         }
+
         this.filebox = React.createRef()
         this.changeState = this.changeState.bind(this)
         this.tagImportant = this.tagImportant.bind(this)
         this.submitTodo = this.submitTodo.bind(this)
+
+        this.changeListState = type=>{
+            if(this.props.changeState) {
+                this.props.changeState(type)
+            } else {
+                console.log('新增狀態所以沒有this.props.changeState')
+            }
+        }
     }
 
     changeState(event) {
@@ -28,6 +41,7 @@ class ConnectInputTask  extends React.Component {
             value = value.substring(value.lastIndexOf('\\')+1)
         } else if (event.target.name==="complete") {
             value = event.target.checked
+            this.changeListState('complete')
         }
         this.setState({[event.target.name]:value})
     }
@@ -38,6 +52,9 @@ class ConnectInputTask  extends React.Component {
         } else {
             this.setState({ important: '' })
         }
+        //一併更新狀態到外面的`List`組件去
+        this.changeListState('important')
+
     }
 
     submitTodo() {
@@ -45,14 +62,24 @@ class ConnectInputTask  extends React.Component {
         if (this.state.name === '') {
             alert('待辦事項名稱未輸入！')
         } else {
-            this.props.addTodoList(this.state)
-            alert('新增成功')
-            this.props.closeAdd()
+            //判斷id是否有值
+            if (this.state.id === '') {
+                this.props.addTodoList(this.state)
+                alert('成功新增！')
+            }
+            else {
+                //有的話就執行編輯
+                this.props.editTodoList(this.state)
+                alert('編輯成功！')
+            }
+
+            
              //初始化資料資料
             this.setState({id:'',name:'',date:'',time:'',file:'',commit:''
             ,important:'',complete:false})
             //不受控組件另外處理
             this.filebox.current.value = ''
+            this.props.closeAdd()
         }
     }
 

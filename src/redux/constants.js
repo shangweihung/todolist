@@ -7,4 +7,6 @@ const todoData = [
 
 const ADDTODOLIST = "ADDTODOLIST"
 
-export {todoData,ADDTODOLIST }
+const EDITTODOLIST = "EDIT_TODOLIST"
+
+export {todoData,ADDTODOLIST,EDITTODOLIST }

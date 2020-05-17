@@ -1,5 +1,11 @@
-import {ADDTODOLIST} from './constants'
+import {ADDTODOLIST, EDITTODOLIST} from './constants'
 
-export const addTodoList = todoList => ({
+const addTodoList = todoList => ({
     type : ADDTODOLIST, payload : todoList
 })
+
+const editTodoList = todoList => ({
+    type: EDITTODOLIST, payload : todoList
+})
+
+export {addTodoList, editTodoList}
