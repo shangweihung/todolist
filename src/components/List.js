@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import InputTask from './InputTask';
 import {editTodoList} from '../redux/action';
 
+/*List組件來讀資料，取到所有的事項資料後再用迴圈將每筆事項用組件讀出來 */
 class ConnectList  extends React.Component {
     constructor(props) {
         super(props)
@@ -11,8 +12,10 @@ class ConnectList  extends React.Component {
             complete: this.props.listData.complete,
             editTasks: null
         }
+        /*顯示事項的時候，也可以同時標記已完成和是否重要 */
+
         this.changeState = this.changeState.bind(this)
-        this.updataTodoList = this.updataTodoList.bind(this)
+        this.updateTodoList = this.updateTodoList.bind(this)
         this.openEdit = this.openEdit.bind(this)
         this.closeEdit = this.closeEdit.bind(this)
         this.list = React.createRef()
@@ -23,15 +26,15 @@ class ConnectList  extends React.Component {
             case "complete": {
                 this.setState({
                     complete: window.event.target.checked
-                }, this.updataTodoList)
+                }, this.updateTodoList)
                 break;
             }
 
             case "important": {
                 if (this.state.important === ''){
-                    this.setState({ important: 'Y' }, this.updataTodoList)
+                    this.setState({ important: 'Y' }, this.updateTodoList)
                 } else {
-                    this.setState({ important: '' }, this.updataTodoList)
+                    this.setState({ important: '' }, this.updateTodoList)
                 }
                 break;
             }
@@ -42,7 +45,7 @@ class ConnectList  extends React.Component {
         }
     }
 
-    updataTodoList() {
+    updateTodoList() {
         let updateList = Object.assign({}, this.props.listData)
 
         updateList = {...updateList,
@@ -73,7 +76,7 @@ class ConnectList  extends React.Component {
         return (
             <div class="listBlock">
                 <div class={' list ' + (this.state.important === 'Y' ? ' important ' : '')} 
-                             onClick={this.openEdit} ref={this.list}>>
+                             onClick={this.openEdit} ref={this.list}>
                     <input type="checkbox" class="taskChk" checked={this.state.complete} onChange={this.changeState.bind(this,'complete')} />
                     <input type="text" class={' taskTitle ' + (this.state.complete ? ' complete ' : '') +
                                 (this.state.important ? ' important ' : '') } value={this.props.listData.name}  />

@@ -21,7 +21,7 @@ class InputTasksForm extends React.Component{
 
                     <InputName className="far fa-comment-dots" inputName="Comment" />
                     <div class="inputForm">
-                        <textarea name="commit" rows="7" cols="55" class="inputStyle"
+                        <textarea name="commit" rows="5" cols="55" class="inputStyle"
                              value={this.props.stateData.commit} 
                              onChange={this.props.changeState} >
                         </textarea>

@@ -6,7 +6,7 @@ import { addTodoList } from '../redux/action';
 class ConnectInputTask  extends React.Component {
     constructor(props) {
         super(props)
-        if (this.props.listData) {
+        if (this.props.listData) {  //新增的話則不會有listData
             this.state = this.props.listData
         } else {
             this.state = {
@@ -22,6 +22,8 @@ class ConnectInputTask  extends React.Component {
         }
 
         this.filebox = React.createRef()
+        //另外考慮有一個檔案上傳沒辦法設定value,所以使用Ref
+
         this.changeState = this.changeState.bind(this)
         this.tagImportant = this.tagImportant.bind(this)
         this.submitTodo = this.submitTodo.bind(this)
@@ -68,17 +70,18 @@ class ConnectInputTask  extends React.Component {
                 alert('成功新增！')
             }
             else {
-                //有的話就執行編輯
+            //有的話就執行編輯
                 this.props.editTodoList(this.state)
                 alert('編輯成功！')
             }
 
             
-             //初始化資料資料
+            //初始化資料資料
             this.setState({id:'',name:'',date:'',time:'',file:'',commit:''
             ,important:'',complete:false})
             //不受控組件另外處理
             this.filebox.current.value = ''
+
             this.props.closeAdd()
         }
     }
@@ -100,7 +103,8 @@ class ConnectInputTask  extends React.Component {
                         onClick={this.tagImportant} ></i>
                     <i class="fas fa-pen fa-lg icon icon_edit"></i>
                 </div>
-                <InputTasksForm closeAdd={this.props.closeAdd}
+                <InputTasksForm 
+                    closeAdd={this.props.closeAdd}
                     stateData={this.state}
                     changeState={this.changeState}
                     submitTodo={this.submitTodo}
@@ -112,11 +116,12 @@ class ConnectInputTask  extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => {
-    return { //使用dispatch操作store
+    return { //使用dispatch呼叫事件addTodoList操作store
         addTodoList: todoList => dispatch(addTodoList(todoList))
     }
 }
 
+//而因為該組件並不需要取得任何資料，所以在沒有第一個參數mapDispatchToProps的情況下直接傳入null
 const InputTask = connect(null,mapDispatchToProps)(ConnectInputTask)
 
 

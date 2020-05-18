@@ -1,5 +1,5 @@
 import React from 'react';
-import TodoLists from './TodoLists';
+import TodoLists from '../TodoLists';
 
 class InProgress extends React.Component {
     render() {

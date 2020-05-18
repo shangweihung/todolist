@@ -3,9 +3,9 @@ import InputTask from './InputTask';
 
 class AddTask extends React.Component {
     openAdd(){
-        //將輸入框設定隱藏
+        //隱藏輸入框
         document.getElementById('addTask').style.display='none'
-        //輸入表單設定顯示
+        //顯示輸入表單
         document.getElementById('inputTask').style.display=''
     }
 

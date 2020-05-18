@@ -1,5 +1,10 @@
 import {todoData, ADDTODOLIST, EDITTODOLIST} from './constants';
 
+
+/*
+reducer 會在裡面描述每個動作對資料發生的事情, 而因為動作通常不只一個,
+所以會用switch來判斷目前收到的指令
+ */
 const todoListReducer = (state = todoData, action) => {
     switch(action.type){
         case ADDTODOLIST:{
