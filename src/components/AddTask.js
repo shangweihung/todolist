@@ -20,7 +20,7 @@ class AddTask extends React.Component {
         return (
             <div>
                 <div>
-                    <input id="addTask" value=" + Add Task" onClick={this.openAdd}/>
+                    <input id="addTask" value=" + Add New Task" onClick={this.openAdd}/>
                 </div>
                 <div id="inputTask" style={{display:'none'}}>
                     <InputTask closeAdd={this.closeAdd} />
